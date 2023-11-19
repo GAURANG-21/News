@@ -24,9 +24,9 @@ async function fetch_news(q,counter,sources,sortBy,ctx){
         `Title: ${element.title}\n`+
         `Read More: ${element.url}\n`)
     }
-    ctx.reply(`This is page number: ${counter}\n`);
-    if(counter!=1){ctx.reply("/next for next page\n");
-                    ctx.reply("/prev for previous page\n")}
+    await ctx.reply(`This is page number: ${counter}\n`);
+    if(counter!=1){await ctx.reply("/next for next page\n");
+                    await ctx.reply("/prev for previous page\n")}
     else ctx.reply("/next for next page")
     }
     catch (error) {
@@ -81,6 +81,7 @@ bot.command('publishedAt',async (ctx)=>{
 })
     bot.on('text',async (ctx) => {
         q = ctx.message.text;
+        counter = 1;
         await fetch_news(q,counter,sources,sortBy,ctx);
         ctx.reply(`Your search is now based on: ${q}`);
     });
